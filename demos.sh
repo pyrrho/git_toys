@@ -1,5 +1,6 @@
 demonstrate_multi_line_echo() {
-    echo "This is a multi-line"\
+    echo -e\
+         "This is a multi-line"\
          "echo. The printed text isn't on multiple lines."\
          "\nExcept when I want it"\
          "to be."\
@@ -8,7 +9,7 @@ demonstrate_multi_line_echo() {
 }
 
 demonstrate_multi_line_function_argument_impl() {
-    echo "$@"
+    echo -e "$@"
 }
 
 demonstrate_multi_line_function_argument() {

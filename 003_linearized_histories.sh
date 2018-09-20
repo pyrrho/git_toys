@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -20,7 +20,7 @@ reset_repo
 
 msg "Files and branches incoming..."
 
-echo "Here is our first file" > file_a.txt
+echo -e "Here is our first file" > file_a.txt
 { set -x; } 2>/dev/null
 git add file_a.txt
 git commit -m "Add file_a.txt"
@@ -28,7 +28,7 @@ git commit -m "Add file_a.txt"
 
 nl
 git_co -b new_files/1/file_b.txt
-echo "Here's another file." > file_b.txt
+echo -e "Here's another file." > file_b.txt
 { set -x; } 2>/dev/null
 git add file_b.txt
 git commit -m "Add file_b.txt"
@@ -36,7 +36,7 @@ git commit -m "Add file_b.txt"
 
 nl
 git_co -b new_files/2/file_c.txt
-echo "A third one...." > file_c.txt
+echo -e "A third one...." > file_c.txt
 { set -x; } 2>/dev/null
 git add file_c.txt
 git commit -m "Add file_c.txt"
@@ -44,7 +44,7 @@ git commit -m "Add file_c.txt"
 
 nl
 git_co -b new_files/3/file_d.txt
-echo "And a fourth, for good measure" > file_d.txt
+echo -e "And a fourth, for good measure" > file_d.txt
 { set -x; } 2>/dev/null
 git add file_d.txt
 git commit -m "Add file_d.txt"
@@ -119,7 +119,8 @@ describe_file file_b.txt
 wsg "Yep, that looks like a rebase conflict if I've ever seen one."\
     "\nLet's fix that up by combining the two changes..."
 
-echo "Here's an important and amazing file." >| file_b.txt
+echo -e "Here's an important and amazing file." >| file_b.txt
+describe_file file_b.txt
 git add file_b.txt
 git rebase --continue
 
@@ -140,7 +141,8 @@ nl
 
 git_co master
 git_merge_branch new_files/1/file_b.txt
-nl
+
+git_lg --all
 
 wsg "This concludes the first series of demos. Now that the first few pitfalls"\
     "have been exposed, and the primary motivations have been shown it's time"\

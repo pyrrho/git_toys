@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -20,7 +20,7 @@ reset_repo
 
 msg "The the repository has been initialized. Let's add a file..."
 
-echo "Here is our first file" > file_a.txt
+echo -e "Here is our first file" > file_a.txt
 describe_file file_a.txt
 
 { set -x; } 2>/dev/null
@@ -33,7 +33,7 @@ wsg "A repository has been initialized, and we've added a file."\
 
 git_co -b new_files/1/file_b.txt
 
-echo "Here's another file." > file_b.txt
+echo -e "Here's another file." > file_b.txt
 describe_file file_b.txt
 
 { set -x; } 2>/dev/null
@@ -44,7 +44,7 @@ git commit -m "Add file_b.txt"
 nl
 git_co -b new_files/2/file_c.txt
 
-echo "A third one...." > file_c.txt
+echo -e "A third one...." > file_c.txt
 describe_file file_c.txt
 
 { set -x; } 2>/dev/null
@@ -55,7 +55,7 @@ git commit -m "Add file_c.txt"
 nl
 git_co -b new_files/3/file_d.txt
 
-echo "And a fourth, for good measure" > file_d.txt
+echo -e "And a fourth, for good measure" > file_d.txt
 describe_file file_d.txt
 
 { set -x; } 2>/dev/null
