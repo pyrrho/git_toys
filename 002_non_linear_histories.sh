@@ -54,7 +54,7 @@ git_lg --all
 
 wsg "This state should look familiar to you, if you've seen the previous demo."\
     "\nBut What happens if we find a bug in file_b.txt during a review? A fix"\
-    "willneed to be applied. Obviously. But where?"\
+    "will need to be applied. Obviously. But where?"\
     "\nBranch new_files/3 -- the latest in our stack, and the current HEAD --"\
     "doesn't have anything to do with file_b, so the fix doesn't 'fit' there."\
     "We could make a new branch, but then the flaw will remain in branches"\
