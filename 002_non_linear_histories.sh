@@ -4,7 +4,6 @@ IFS=$'\n\t'
 
 source ./msgs.sh
 source ./gits.sh
-source ./demos.sh
 source ./operations.sh
 
 # This will start logging commands this script executes.
