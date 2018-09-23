@@ -111,7 +111,7 @@ git commit -m "Resolve a bug that was in file_b.txt"
 nl
 git_co master
 git_merge_branch bug_fix
-git br -d bug_fix
+git branch -d bug_fix
 
 git_lg --all
 
