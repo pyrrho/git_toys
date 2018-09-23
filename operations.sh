@@ -11,7 +11,5 @@ reset_repo() {
     cd repo
 
     git init .
-    { set -x; } 2>/dev/null
     git commit --allow-empty -m "First Commit"
-    { set +x; } 2>/dev/null
 }
