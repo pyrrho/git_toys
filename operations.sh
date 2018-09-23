@@ -15,4 +15,3 @@ reset_repo() {
     git commit --allow-empty -m "First Commit"
     { set +x; } 2>/dev/null
 }
-
