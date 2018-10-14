@@ -100,9 +100,13 @@ SCRIPT
 # --- Start our new scenario pieces
 show_single_cmd git_lg --all
 swsg 3<<EOM
-Ok, we're finally back to where we got in trouble last time. We want to
-rebase our whole stack on top of master, but when we tried doing that
-with rebase --onto we ended up making a mistake:
+Ok, we're finally back to where things went wrong last time. Let's recap what we
+did, and how it got us into trouble.
+EOM
+
+swsg 3<<EOM
+The goal is to rebase our whole stack on top of master, but when we tried doing
+that with rebase --onto we ended up making a mistake:
 
 We ran this:
 
@@ -114,12 +118,12 @@ By doing that, we asked git to rebase a commit range between a base
 we had already rebased, and a tip which we hadn't moved yet, with
 predictably disastrous consequences.
 
-This time we're going to be more careful about our rebase. Let's start
+This time we're going to be more careful about our rebases. Let's start
 by recording where we're coming from with a few lightweight tags.
 EOM
 
 showcmd "Tag all the branches in our stack" 3<<'SCRIPT'
-    ### ### TAG_NAME                              REF_NAME
+    ### ### TAG_NAME             REF_NAME
     git tag _rebase/1/step_one   add_files/1/step_one
     git tag _rebase/2/step_two   add_files/2/step_two
     git tag _rebase/3/step_three add_files/3/step_three
@@ -135,12 +139,16 @@ Why did we do that again?
 Well, \`git rebase --onto\` is a ternary operation: you need 3 git refs to
 point it at the right thing to do:
 
-    git rebase <start of range>          \\
+    git rebase <parent of range>         \\
                <end of range>            \\
                <where to put that range>
 
-These new tags give us a way to say 'Get me the commits in this branch of my
-stack, and put it on the rebased version of my parent branch.'
+(Before you ask, yes one of these can be implied. The two-argument from of
+rebase --onto is \`git rebase <parent> --onto <where>\`. \`<end>\` is implied to
+be the current HEAD.)
+
+The new tags we added give us a way to say 'Get me the commits in this branch of
+my stack, and put it on the rebased version of my parent branch.'
 
 Let's try our rebases using tags!
 EOM
@@ -149,14 +157,9 @@ showcmd "Move branch 1" 3<<'SCRIPT'
 git rebase master add_files/1/step_one --onto master
 SCRIPT
 
-msg "First rebase is easy, branch onto master, just like before."
-
 { set +e; } 2>/dev/null
 showcmd "Move branch two" 3<<'SCRIPT'
-git rebase \
-    _rebase/1/step_one \
-    add_files/2/step_two \
-    --onto add_files/1/step_one
+    git rebase _rebase/1/step_one add_files/2/step_two --onto add_files/1/step_one
 SCRIPT
 { set -e; } 2>/dev/null
 
@@ -180,16 +183,10 @@ show_single_cmd git_lg --all
 wsg "Ok, good to go. Let's finish up the rest of our stacked rebase!"
 
 showcmd "Move branch three" 3<<'SCRIPT'
-git rebase \
-    _rebase/2/step_two \
-    add_files/3/step_three \
-    --onto add_files/2/step_two
+    git rebase _rebase/2/step_two add_files/3/step_three --onto add_files/2/step_two
 SCRIPT
 showcmd "Move branch four" 3<<'SCRIPT'
-git rebase \
-    _rebase/3/step_three \
-    add_files/4/step_four \
-    --onto add_files/3/step_three
+    git rebase _rebase/3/step_three add_files/4/step_four --onto add_files/3/step_three
 SCRIPT
 
 show_single_cmd git_lg --all
