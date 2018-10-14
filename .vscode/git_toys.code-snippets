@@ -30,7 +30,7 @@
 		"description": "Open a new Wait Message block (correctly) (and then close it, too)"
 	},
 	"Show Commands Block": {
-		"prefix": "showcmd",
+		"prefix": ["showcmd", "cmds"],
 		"body": [
 			"showcmd \"${1:Header}\" 3<<'SCRIPT'",
 			"    ${2:echo \"Hello World\"}",
