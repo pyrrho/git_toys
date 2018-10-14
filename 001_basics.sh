@@ -130,7 +130,7 @@ SCRIPT
 
 show_single_cmd git_lg
 
-swsg 3<<EOM
+smsg 3<<EOM
 Now new_files/1 has been merged into master, and the whole stack collapsed. Each
 piece of work has been (well... let's pretend they've been) reviewed and
 recorded independently.

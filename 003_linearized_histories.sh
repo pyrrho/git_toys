@@ -146,7 +146,7 @@ SCRIPT
 
 show_single_cmd git_lg --all
 
-swsg 3<<EOM
+smsg 3<<EOM
 This concludes the first series of demos.
 
 Now that the first (few) pitfall(s) have been exposed, and the primary

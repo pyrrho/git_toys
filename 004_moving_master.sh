@@ -222,7 +222,6 @@ EOM
 describe_file file_b.txt
 
 swsg 3<<EOM
-Message text
 In addition to git diff coming up blank, file_b.txt is definitely in the state
 that we want it to be in.
 
@@ -254,12 +253,12 @@ Looking at the body of that patch, we can see why it failed to land; the
 contents of file_b.txt at this point in our rebased history is different from
 what this commit -- the old version of this commit, specifically -- expected it
 to be.
+
+To clarify, the root problem here isn't the content of the commit we're trying
+to apply, it's that we're trying to apply this commit at all!
 EOM
 
 smsg 3<<EOM
-To clarify, the root problem here isn't the content of the commit we're trying
-to apply, it's that we're trying to apply this commit at all.
-
 When we ran the command to rebase add_files/3/step_three onto the new version of
 add_files/2/step_two we did something very naive;
 

@@ -208,7 +208,7 @@ swsg 3<<EOM
 Here we are at the merge conflict I was teasing previously.
 EOM
 
-swsg 3<<EOM
+smsg 3<<EOM
 The really imporant note here is that git didn't fail until we attempted to
 merge the conflicting histories, halfway through the stack collapse operation.
 
